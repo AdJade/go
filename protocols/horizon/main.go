@@ -230,6 +230,7 @@ type offerBase struct {
 		OfferMaker hal.Link `json:"offer_maker"`
 	} `json:"_links"`
 
+	ID                 int64      `json:"id,string"`
 	PT                 string     `json:"paging_token"`
 	Seller             string     `json:"seller"`
 	Selling            Asset      `json:"selling"`
@@ -413,9 +414,10 @@ type TradeEffect struct {
 	LedgerCloseTime   time.Time `json:"created_at"`
 }
 
-// Action needed in release: horizon-v0.25.0: Move back to TradeAggregation,
-// remove embedded struct
-type tradeAggregationBase struct {
+// TradeAggregation represents trade data aggregation over a period of time
+type TradeAggregation struct {
+	Timestamp     int64     `json:"timestamp,string"`
+	TradeCount    int64     `json:"trade_count,string"`
 	BaseVolume    string    `json:"base_volume"`
 	CounterVolume string    `json:"counter_volume"`
 	Average       string    `json:"avg"`
@@ -429,51 +431,9 @@ type tradeAggregationBase struct {
 	CloseR        xdr.Price `json:"close_r"`
 }
 
-// TradeAggregation represents trade data aggregation over a period of time
-type TradeAggregation struct {
-	tradeAggregationBase
-	// Action needed in release: horizon-v0.25.0: Make timestamp a string
-	Timestamp int64 `json:"timestamp"`
-	// Action needed in release: horizon-v0.25.0: Make trade_count a string
-	TradeCount int64 `json:"trade_count"`
-}
-
 // PagingToken implementation for hal.Pageable. Not actually used
 func (res TradeAggregation) PagingToken() string {
 	return string(res.Timestamp)
-}
-
-// UnmarshalJSON is the custom unmarshal method for TradeAggregation. It allows
-// parsing of timestamp and trade_count as a string or an int64.
-// Action needed in release: horizon-v0.25.0: Delete
-func (res *TradeAggregation) UnmarshalJSON(data []byte) error {
-	var temp struct {
-		Timestamp  json.Number `json:"timestamp"`
-		TradeCount json.Number `json:"trade_count"`
-	}
-
-	if err := json.Unmarshal(data, &res.tradeAggregationBase); err != nil {
-		return err
-	}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
-		return err
-	}
-
-	timestamp, err := temp.Timestamp.Int64()
-	if err != nil {
-		return err
-	}
-
-	tradeCount, err := temp.TradeCount.Int64()
-	if err != nil {
-		return err
-	}
-
-	res.Timestamp = timestamp
-	res.TradeCount = tradeCount
-
-	return nil
 }
 
 // Transaction represents a single, successful transaction

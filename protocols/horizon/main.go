@@ -223,8 +223,8 @@ func (l Ledger) PagingToken() string {
 	return l.PT
 }
 
-// Action needed in release: horizon-v0.25.0: Move back to Offer, remove embedded struct
-type offerBase struct {
+// Offer is the display form of an offer to trade currency.
+type Offer struct {
 	Links struct {
 		Self       hal.Link `json:"self"`
 		OfferMaker hal.Link `json:"offer_maker"`
@@ -242,41 +242,8 @@ type offerBase struct {
 	LastModifiedTime   *time.Time `json:"last_modified_time"`
 }
 
-// Offer is the display form of an offer to trade currency.
-type Offer struct {
-	offerBase
-	// Action needed in release: horizon-v0.25.0: Make id a string
-	ID int64 `json:"id"`
-}
-
 func (o Offer) PagingToken() string {
 	return o.PT
-}
-
-// UnmarshalJSON is the custom unmarshal method for Offer. It allows
-// parsing of id as a string or an int64.
-// Action needed in release: horizon-v0.25.0: Delete
-func (o *Offer) UnmarshalJSON(data []byte) error {
-	var temp struct {
-		ID json.Number `json:"id"`
-	}
-
-	if err := json.Unmarshal(data, &o.offerBase); err != nil {
-		return err
-	}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
-		return err
-	}
-
-	offerID, err := temp.ID.Int64()
-	if err != nil {
-		return err
-	}
-
-	o.ID = offerID
-
-	return nil
 }
 
 // OrderBookSummary represents a snapshot summary of a given order book

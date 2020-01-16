@@ -207,7 +207,7 @@ func TestTradeEffectOfferID(t *testing.T) {
 	}{
 		{
 			desc:    "offer_id as a string",
-			payload: tradeEffectStringOfferID,
+			payload: tradeEffectPage,
 		},
 	}
 	for _, tc := range testCases {
@@ -331,7 +331,7 @@ var sequenceBumpedPage = `{
 	}
   }`
 
-var tradeEffectStringOfferID = `
+var tradeEffectPage = `
 {
 	"_embedded": {
 	  "records": [

@@ -187,10 +187,6 @@ func TestManageSellManageBuyOfferOfferID(t *testing.T) {
 		payload string
 	}{
 		{
-			desc:    "offer_id as a number",
-			payload: numberManageSellBuyOfferOperations,
-		},
-		{
 			desc:    "offer_id as a string",
 			payload: stringManageSellBuyOfferOperations,
 		},

@@ -210,10 +210,6 @@ func TestTradeEffectOfferID(t *testing.T) {
 		payload string
 	}{
 		{
-			desc:    "offer_id as a number",
-			payload: tradeEffectNumberOfferID,
-		},
-		{
 			desc:    "offer_id as a string",
 			payload: tradeEffectStringOfferID,
 		},
@@ -376,42 +372,6 @@ var sequenceBumpedAsStringPage = `{
 	  ]
 	}
   }`
-
-var tradeEffectNumberOfferID = `
-{
-	"_embedded": {
-	  "records": [
-		{
-		  "_links": {
-			"operation": {
-			  "href": "https://horizon-testnet.stellar.org/operations/224209713045979100"
-			},
-			"succeeds": {
-			  "href": "https://horizon-testnet.stellar.org/effects?order=desc&cursor=224209713045979100-3"
-			},
-			"precedes": {
-			  "href": "https://horizon-testnet.stellar.org/effects?order=asc&cursor=224209713045979100-3"
-			}
-		  },
-		  "id": "2214209713045979100-0000000003",
-		  "paging_token": "224209713045979100-3",
-		  "account": "GCDIZFWLOTBWHTPODXCBH6XNXPFMSQFRVIDRP3JLEKQZN66G7NF3ANOD",
-		  "type": "trade",
-		  "type_i": 33,
-		  "created_at": "2019-11-01T23:05:58Z",
-		  "seller": "GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX",
-		  "offer_id": 127538672,
-		  "sold_amount": "14.5984123",
-		  "sold_asset_type": "native",
-		  "bought_amount": "1.0000000",
-		  "bought_asset_type": "credit_alphanum4",
-		  "bought_asset_code": "USD",
-		  "bought_asset_issuer": "GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX"
-		}
-	  ]
-	}
-}
-`
 
 var tradeEffectStringOfferID = `
 {

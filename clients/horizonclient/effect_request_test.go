@@ -170,11 +170,7 @@ func TestSequenceBumpedNewSeq(t *testing.T) {
 	}{
 		{
 			desc:    "new_seq as a string",
-			payload: sequenceBumpedAsStringPage,
-		},
-		{
-			desc:    "new_seq as a number",
-			payload: sequenceBumpedAsNumberPage,
+			payload: sequenceBumpedPage,
 		},
 	}
 	for _, tc := range testCases {
@@ -297,45 +293,7 @@ var firstEffectsPage = `{
   }
 }`
 
-var sequenceBumpedAsNumberPage = `{
-	"_links": {
-	  "self": {
-		"href": "https://horizon-testnet.stellar.org/accounts/GCDIZFWLOTBWHTPODXCBH6XNXPFMSQFRVIDRP3JLEKQZN66G7NF3ANOD/effects?cursor=&limit=10&order=asc"
-	  },
-	  "next": {
-		"href": "https://horizon-testnet.stellar.org/accounts/GCDIZFWLOTBWHTPODXCBH6XNXPFMSQFRVIDRP3JLEKQZN66G7NF3ANOD/effects?cursor=1557363731492865-3&limit=10&order=asc"
-	  },
-	  "prev": {
-		"href": "https://horizon-testnet.stellar.org/accounts/GCDIZFWLOTBWHTPODXCBH6XNXPFMSQFRVIDRP3JLEKQZN66G7NF3ANOD/effects?cursor=1557363731492865-1&limit=10&order=desc"
-	  }
-	},
-	"_embedded": {
-	  "records": [
-		{
-		  "_links": {
-			"operation": {
-			  "href": "https://horizon-testnet.stellar.org/operations/249108107265"
-			},
-			"succeeds": {
-			  "href": "https://horizon-testnet.stellar.org/effects?order=desc\u0026cursor=249108107265-1"
-			},
-			"precedes": {
-			  "href": "https://horizon-testnet.stellar.org/effects?order=asc\u0026cursor=249108107265-1"
-			}
-		  },
-		  "id": "0000000249108107265-0000000001",
-		  "paging_token": "249108107265-1",
-		  "account": "GCQZP3IU7XU6EJ63JZXKCQOYT2RNXN3HB5CNHENNUEUHSMA4VUJJJSEN",
-		  "type": "sequence_bumped",
-		  "type_i": 43,
-		  "created_at": "2019-06-03T16:36:24Z",
-		  "new_seq": 300000000000
-		}
-	  ]
-	}
-  }`
-
-var sequenceBumpedAsStringPage = `{
+var sequenceBumpedPage = `{
 	"_links": {
 	  "self": {
 		"href": "https://horizon-testnet.stellar.org/accounts/GCDIZFWLOTBWHTPODXCBH6XNXPFMSQFRVIDRP3JLEKQZN66G7NF3ANOD/effects?cursor=&limit=10&order=asc"

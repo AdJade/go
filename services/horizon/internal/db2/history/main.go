@@ -261,6 +261,21 @@ type Effect struct {
 	DetailsString      null.String `db:"details"`
 }
 
+// TradeEffectDetails is a struct of data from `effects.DetailsString`
+// when the effect type is trade
+type TradeEffectDetails struct {
+	Seller            string `json:"seller"`
+	OfferID           int64  `json:"offer_id"`
+	SoldAmount        string `json:"sold_amount"`
+	SoldAssetType     string `json:"sold_asset_type"`
+	SoldAssetCode     string `json:"sold_asset_code,omitempty"`
+	SoldAssetIssuer   string `json:"sold_asset_issuer,omitempty"`
+	BoughtAmount      string `json:"bought_amount"`
+	BoughtAssetType   string `json:"bought_asset_type"`
+	BoughtAssetCode   string `json:"bought_asset_code,omitempty"`
+	BoughtAssetIssuer string `json:"bought_asset_issuer,omitempty"`
+}
+
 // SequenceBumped is a struct of data from `effects.DetailsString`
 // when the effect type is sequence bumped.
 type SequenceBumped struct {
